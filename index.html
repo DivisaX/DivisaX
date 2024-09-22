@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Divisas</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Estilos básicos para una vista previa rápida */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #2b0047;
+        }
+
+        header {
+            background-color: #0d0233;
+            color: #ffffff;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(255, 254, 254, 0.1);
+        text-size-adjust: 70PX;}
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        main {
+            padding: 40px 20px;
+        }
+
+        .converter {
+            background-color: #d3cdcd60;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(255, 253, 253, 0.219);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        label {
+            font-weight: bold;
+            flex-basis: 20%;
+        }
+
+        select, input[type="number"] {
+            flex-grow: 1;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ffffff94;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #ff5303b4;
+            color: #a4a5ac;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #155ab4;
+        }
+
+        #result {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            color: #000000b4;
+        }
+
+        footer {
+            background-color: #170b49;
+            color: #cacaca;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>DivisaX</h1>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <div class="converter">
+                <div class="input-group">
+                    <label for="fromCurrency">De:</label>
+                    <select id="fromCurrency" aria-label="Selecciona la divisa de origen">
+                        <option value="USD">USD - Dólar estadounidense</option>
+                        <option value="EUR">EUR - Euro</option>
+                        <option value="GBP">GBP - Libra esterlina</option>
+                        <option value="JPY">JPY - Yen japonés</option>
+                        <option value="AUD">AUD - Dólar australiano</option>
+                        <option value="CAD">CAD - Dólar canadiense</option>
+                        <option value="CHF">CHF - Franco suizo</option>
+                        <option value="CNY">CNY - Yuan chino</option>
+                        <option value="SEK">SEK - Corona sueca</option>
+                        <option value="NZD">NZD - Dólar neozelandés</option>
+                        <option value="MXN">MXN - Peso mexicano</option>
+                        <option value="SGD">SGD - Dólar de Singapur</option>
+                        <option value="HKD">HKD - Dólar de Hong Kong</option>
+                        <option value="NOK">NOK - Corona noruega</option>
+                        <option value="KRW">KRW - Won surcoreano</option>
+                        <option value="TRY">TRY - Lira turca</option>
+                        <option value="RUB">RUB - Rublo ruso</option>
+                        <option value="INR">INR - Rupia india</option>
+                        <option value="BRL">BRL - Real brasileño</option>
+                        <option value="ZAR">ZAR - Rand sudafricano</option>
+                        <option value="ARS">ARS - Peso argentino</option>
+                        <option value="CLP">CLP - Peso chileno</option>
+                        <option value="COP">COP - Peso colombiano</option>
+                        <option value="PEN">PEN - Sol peruano</option>
+                        <option value="VND">VND - Dong vietnamita</option>
+                        <option value="TWD">TWD - Nuevo dólar taiwanés</option>
+                        <option value="ILS">ILS - Nuevo shekel israelí</option>
+                        <option value="MYR">MYR - Ringgit malasio</option>
+                        <option value="PHP">PHP - Peso filipino</option>
+                        <option value="PKR">PKR - Rupia pakistaní</option>
+                        <option value="SAR">SAR - Riyal saudí</option>
+                        <option value="AED">AED - Dirham de los EAU</option>
+                        <option value="HUF">HUF - Forinto húngaro</option>
+                        <option value="CZK">CZK - Corona checa</option>
+                        <option value="DKK">DKK - Corona danesa</option>
+                        <option value="PLN">PLN - Zloty polaco</option>
+                        <option value="RON">RON - Leu rumano</option>
+                        <option value="ISK">ISK - Corona islandesa</option>
+                        <option value="HRK">HRK - Kuna croata</option>
+                        <option value="BGN">BGN - Lev búlgaro</option>
+                        <option value="NAD">NAD - Dólar namibio</option>
+                        <option value="MUR">MUR - Rupia de Mauricio</option>
+                        <option value="GHS">GHS - Cedi ghanés</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="toCurrency">A:</label>
+                    <select id="toCurrency" aria-label="Selecciona la divisa de destino">
+                        <option value="USD">USD - Dólar estadounidense</option>
+                        <option value="EUR">EUR - Euro</option>
+                        <option value="GBP">GBP - Libra esterlina</option>
+                        <option value="JPY">JPY - Yen japonés</option>
+                        <option value="AUD">AUD - Dólar australiano</option>
+                        <option value="CAD">CAD - Dólar canadiense</option>
+                        <option value="CHF">CHF - Franco suizo</option>
+                        <option value="CNY">CNY - Yuan chino</option>
+                        <option value="SEK">SEK - Corona sueca</option>
+                        <option value="NZD">NZD - Dólar neozelandés</option>
+                        <option value="MXN">MXN - Peso mexicano</option>
+                        <option value="SGD">SGD - Dólar de Singapur</option>
+                        <option value="HKD">HKD - Dólar de Hong Kong</option>
+                        <option value="NOK">NOK - Corona noruega</option>
+                        <option value="KRW">KRW - Won surcoreano</option>
+                        <option value="TRY">TRY - Lira turca</option>
+                        <option value="RUB">RUB - Rublo ruso</option>
+                        <option value="INR">INR - Rupia india</option>
+                        <option value="BRL">BRL - Real brasileño</option>
+                        <option value="ZAR">ZAR - Rand sudafricano</option>
+                        <option value="ARS">ARS - Peso argentino</option>
+                        <option value="CLP">CLP - Peso chileno</option>
+                        <option value="COP">COP - Peso colombiano</option>
+                        <option value="PEN">PEN - Sol peruano</option>
+                        <option value="VND">VND - Dong vietnamita</option>
+                        <option value="TWD">TWD - Nuevo dólar taiwanés</option>
+                        <option value="ILS">ILS - Nuevo shekel israelí</option>
+                        <option value="MYR">MYR - Ringgit malasio</option>
+                        <option value="PHP">PHP - Peso filipino</option>
+                        <option value="PKR">PKR - Rupia pakistaní</option>
+                        <option value="SAR">SAR - Riyal saudí</option>
+                        <option value="AED">AED - Dirham de los EAU</option>
+                        <option value="HUF">HUF - Forinto húngaro</option>
+                        <option value="CZK">CZK - Corona checa</option>
+                        <option value="DKK">DKK - Corona danesa</option>
+                        <option value="PLN">PLN - Zloty polaco</option>
+                        <option value="RON">RON - Leu rumano</option>
+                        <option value="ISK">ISK - Corona islandesa</option>
+                        <option value="HRK">HRK - Kuna croata</option>
+                        <option value="BGN">BGN - Lev búlgaro</option>
+                        <option value="NAD">NAD - Dólar namibio</option>
+                        <option value="MUR">MUR - Rupia de Mauricio</option>
+                        <option value="GHS">GHS - Cedi ghanés</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="amount">Importe:</label>
+                    <input type="number" id="amount" placeholder="Introduce el importe" aria-label="Introduce el importe a convertir">
+                </div>
+                <button onclick="convertCurrency()">Convertir</button>
+                <div id="result">Resultado</div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 DivisaX. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        async function convertCurrency() {
+            const fromCurrency = document.getElementById('fromCurrency').value;
+            const toCurrency = document.getElementById('toCurrency').value;
+            const amount = parseFloat(document.getElementById('amount').value);
+            const resultElement = document.getElementById('result');
+
+            if (!isNaN(amount) && amount > 0) {
+                const response = await fetch(`https://v6.exchangerate-api.com/v6/8cc11c18a4745255b321a3b4/pair/${fromCurrency}/${toCurrency}/${amount}`);
+                const data = await response.json();
+
+                if (data.result === 'success') {
+                    const convertedAmount = data.conversion_rate * amount;
+                    resultElement.textContent = `Resultado: ${convertedAmount.toFixed(2)} ${toCurrency}`;
+                } else {
+                    resultElement.textContent = 'Error en la conversión. Por favor, verifica las divisas.';
+                }
+            } else {
+                resultElement.textContent = 'Por favor, introduce un importe válido.';
+            }
+        }
+    </script>
+</body>
+
+</html>
